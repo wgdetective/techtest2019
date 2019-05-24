@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
+}
+
+group 'com.wgdetective'
+version '0.0.1-SNAPSHOT'
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+dependencies {
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-webflux'
+        implementation 'org.apache.kafka:kafka-streams'
+        implementation 'org.springframework.kafka:spring-kafka'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'io.projectreactor:reactor-test'
+        testImplementation 'org.springframework.kafka:spring-kafka-test'
+    }
+}
