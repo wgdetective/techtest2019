@@ -1,28 +1,21 @@
 version: '3'
 services:
-  #  mysql:
-  #    container_name: some-mysql
-  #    image: mysql/mysql-server:5.7
-  #    environment:
-  #      MYSQL_DATABASE: test
-  #      MYSQL_ROOT_PASSWORD: hellokoding
-  #      MYSQL_ROOT_HOST: '%'
-  #    ports:
-  #      - "3306:3306"
-  #    restart: always
-
   server:
     restart: "no"
-    image: gradle:jdk8
-    volumes:
-      - ./server:/home/gradle/server
-    #      - ~/.gradle:/root/.gradle
-    #      - ~/.gradle:/home/gradle/server/.gradle
-    working_dir: /home/gradle/server
+    build: ./server
+    ##    working_dir: /server
     expose:
       - "8080"
-    command: gradle bootRun --stacktrace
-#    command: top
-#    command: /home/gradle/server/gradlew bootRun
-#    depends_on:
-#      - mysql
+    ports:
+      - "8080:8080"
+  client:
+    restart: "no"
+    build: ./client
+    #    working_dir: /client
+    expose:
+      - "8090"
+    ports:
+      #      - "8080:8080"
+      - "8090:8090"
+    depends_on:
+      - server

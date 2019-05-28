@@ -17,7 +17,7 @@ public class ClientController {
 
     @GetMapping("random")
     public String random() {
-        final String url = "http://localhost:8080/testtech/server/calcFibo";
+        final String url = "http://server:8080/testtech/server/calcFibo";
         final String fullUrl = url + "?number=" + random.nextInt(25);
         log.info(fullUrl);
         try {
